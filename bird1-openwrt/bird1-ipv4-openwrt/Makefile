@@ -64,7 +64,7 @@ endef
 
 define Package/$(uci)/postinst
 #!/bin/sh
-    if [ -z "$${IPKG_INSTROOT}" ]; then
+#if [ -z "$${IPKG_INSTROOT}" ]; then
         ( . /etc/$(BIRD)/init.d/bird-uci-install-init.d $(BIRD) ) && rm -f /etc/$(BIRD)/init.d/bird-uci-install-init.d
         ( . /etc/$(BIRD)/init.d/99-relocate-filters $(BIRD) ) && rm -f /etc/$(BIRD)/init.d/99-relocate-filters
         if [ -f /etc/sysupgrade.conf ] && ! grep $(BIRD) /etc/sysupgrade.conf; then
@@ -72,7 +72,7 @@ define Package/$(uci)/postinst
             echo /etc/$(BIRD)/filters/ >> /etc/sysupgrade.conf
             echo /etc/$(BIRD)/functions/ >> /etc/sysupgrade.conf
         fi
-    fi
+#fi
 endef
 
 $(eval $(call BuildPackage,$(uci)))
